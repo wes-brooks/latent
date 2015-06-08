@@ -5,11 +5,12 @@
 #' @param data matrix of observed counts, number of rows equal to the number of observations and columns equal to the number of categories.
 #' @param event vector of event assignment labels, one entry per row of data. Indicates the event to which each row of data belongs.
 #' @param specific vector of TRUE/FALSE values, one entry per column of data. Each entry indicates whether the corresponding FIB species is human-specific.
+#' @param verbose should the function provide verbose output about its progress? Defaults to TRUE.
 #' 
 #' @return A list of results
 #' 
 #' @export
-latent = function(data, event, specific=NULL) {
+latent = function(data, min.detect, event, specific=NULL, verbose=TRUE) {
     #Initial parameters:
     xx = c(rep(as.integer(!specific), length(unique(event))), rep(1, nrow(data) + ncol(data)))
     finished = FALSE
@@ -79,7 +80,7 @@ latent = function(data, event, specific=NULL) {
                 f.new = f.proposed
             }
             
-            print(f.new)
+            if (verbose) cat(paste("Likelihood objective: ", f.new, "\n", sep=""))
             
             
             if ((f.new - f.outer) < tol * f.outer) converged = TRUE
@@ -91,7 +92,7 @@ latent = function(data, event, specific=NULL) {
         alpha = xx[1:(d*p)]
         beta = xx[d*p + 1:p]
         gamma = xx[((d+1)*p+1):length(xx)]
-        data.new = E.step(alpha, beta, gamma, data, event)
+        data.new = E.step(alpha, beta, gamma, data, min.detect, event)
         
         check.old = check
         check = sum((data.new - data)^2, na.rm=TRUE) / sum(data^2, na.rm=TRUE)
@@ -101,18 +102,17 @@ latent = function(data, event, specific=NULL) {
             if (tol<=sqrt(.Machine$double.eps))
                 finished = TRUE
             tol = max(tol/2, sqrt(.Machine$double.eps))
-            print(paste("Iterating with tol=", tol, sep=""))
+            cat(paste("Iterating with tol=", tol, "\n", sep=""))
         }
     }
     
-    ss.total = list()
-    ss.total$data = data
-    ss.total$event = event
-    ss.total$cens = cens
-    ss.total$alpha = alpha
-    ss.total$beta = beta
-    ss.total$gamma = gamma
-    #save(ss.total, file="EM-output/ss.total.RData")
+    result = list()
+    result$data = data
+    result$event = event
+    result$cens = cens
+    result$alpha = alpha
+    result$beta = beta
+    result$gamma = gamma
     
-    return(ss.total)
+    return(result)
 }

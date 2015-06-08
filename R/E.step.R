@@ -10,7 +10,7 @@
 #'
 #'@return A matrix of FIB counts, where the censored counts are replaced by their expectations under the current parameters.
 #'
-E.step = function(alpha, beta, gamma, data, event) {
+E.step = function(alpha, beta, gamma, data, min.detect, event) {
     #Basic constants:
     n = nrow(data)
     p = ncol(data)
@@ -26,18 +26,19 @@ E.step = function(alpha, beta, gamma, data, event) {
     for (j in 1:ncol(data))
         for (t in 1:nrow(data))
             if (!is.na(data[t,j]))
-                if (data[t,j] <= cens[j]) {
+                if (data[t,j] <= min.detect[j]) {
                     #Get the probability that the count is 0,1,...,MLD
                     #Where MLD is the minimum level of detection (censoring threshold).
-                    cens.log.lik = dpois((0:cens[j]), exp(gamma[t]*beta[j] + alpha.local[t,j]), log=TRUE)
+                    cens.log.lik = dpois((0:min.detect[j]), exp(gamma[t]*beta[j] + alpha.local[t,j]), log=TRUE)
                     cens.log.lik = cens.log.lik - max(cens.log.lik, na.rm=TRUE)
                     
                     #Compute the expected count, conditional on count being no greater than censoring threshold
                     #If the total probability below the censoring threshold is indistinguishable from zero,
                     #then set the expectation to the censoring threshold.
                     if (sum(exp(cens.log.lik))==0) {
-                        data[t,j] = cens[j]
-                    } else data[t,j] = sum((0:cens[j]) * exp(cens.log.lik), na.rm=TRUE) / sum(exp(cens.log.lik), na.rm=TRUE)
+                        data[t,j] = min.detect[j]
+                    } else data[t,j] = sum((0:min.detect[j]) * exp(cens.log.lik), na.rm=TRUE) / sum(exp(cens.log.lik), na.rm=TRUE)
                 }
-    y
+
+    return(data)
 }

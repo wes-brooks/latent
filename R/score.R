@@ -22,9 +22,9 @@ score = function(data, params, event, specific=NULL) {
         stop("Each element of 'specific' must be logical (boolean).")
     
     #Extract parameters from the parameter vector:
-    alpha = x[1:(p*d)]
-    beta = x[p*d + 1:p]
-    gamma = x[p+p*d + 1:n]
+    alpha = params[1:(p*d)]
+    beta = params[p*d + 1:p]
+    gamma = params[p+p*d + 1:n]
     
     #Event-level alphas:
     alpha.local = matrix(0, n, p)

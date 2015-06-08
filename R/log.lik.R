@@ -15,10 +15,9 @@ log.lik = function(data, params, event) {
     d = length(unique(event))
     
     #Extract parameters from the parameter vector:
-    alpha = x[1:(p*d)]
-    beta = x[p*d + 1:p]
-    gamma = x[p+p*d + 1:n]
-    lambda = x[n + p + p*d + 1:p]
+    alpha = params[1:(p*d)]
+    beta = params[p*d + 1:p]
+    gamma = params[p+p*d + 1:n]
     
     #Event-level alphas:
     alpha.local = matrix(0, n, p)
