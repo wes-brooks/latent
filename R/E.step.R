@@ -2,13 +2,14 @@
 #'
 #'Compute the expectations of censored FIB counts, resitricted to be less than the censoring threshold.
 #'
-#'@param alpha vector of intercepts where each entry is the intercept for one species/event combination
-#'@param beta slope vector with one entry per FIB species, which indicates the marginal increase in that species' log-mean for a unit increase in the contamination index
-#'@param gamma contamination vector with one entry per row of data, indicating the contamination index for the corresponding row
-#'@param data matrix of FIB counts with one row per sample and one column per FIB species
-#'@param event vector with one entry per row of data where each entry indicates the event with which the data row is associated
+#' @param alpha vector of intercepts where each entry is the intercept for one species/event combination
+#' @param beta slope vector with one entry per FIB species, which indicates the marginal increase in that species' log-mean for a unit increase in the contamination index
+#' @param gamma contamination vector with one entry per row of data, indicating the contamination index for the corresponding row
+#' @param data matrix of FIB counts with one row per sample and one column per FIB species
+#' @param min.detect minimum detectable level of the FIB assay - counts below this threshold are censored 
+#' @param event vector with one entry per row of data where each entry indicates the event with which the data row is associated
 #'
-#'@return A matrix of FIB counts, where the censored counts are replaced by their expectations under the current parameters.
+#' @return A matrix of FIB counts, where the censored counts are replaced by their expectations under the current parameters.
 #'
 E.step = function(alpha, beta, gamma, data, min.detect, event) {
     #Basic constants:

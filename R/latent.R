@@ -3,6 +3,7 @@
 #' Estimate the parameters of a latent variable model by the method of maximum likelihood, using conjugate gradient descent to maximize likelihood and an EM algorithm to handle censored data.
 #' 
 #' @param data matrix of observed counts, number of rows equal to the number of observations and columns equal to the number of categories.
+#' @param min.detect minimum limit of detection for the FIB assay - values below this threshold are censored
 #' @param event vector of event assignment labels, one entry per row of data. Indicates the event to which each row of data belongs.
 #' @param specific vector of TRUE/FALSE values, one entry per column of data. Each entry indicates whether the corresponding FIB species is human-specific.
 #' @param verbose should the function provide verbose output about its progress? Defaults to TRUE.
