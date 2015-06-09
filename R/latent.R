@@ -107,11 +107,14 @@ latent = function(data, min.detect, event, specific=NULL, verbose=TRUE) {
         }
     }
     
+    #Compile the results and return
     result = list()
     result$data = data
+    result$min.detect = cens
     result$event = event
-    result$cens = cens
-    result$alpha = alpha
+    result$specific = specific
+    result$alpha = matrix(alpha, d, p, byrow=TRUE)
+    colnames(result$alpha) = names(result$beta)
     result$beta = beta
     result$gamma = gamma
     

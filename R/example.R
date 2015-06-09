@@ -1,9 +1,10 @@
-#---------
-# This script is an example of using the latent package to 
-# estimate the parameters of a latent variable model for the
-# FIB counts in the storm sewer data set (with event 3 removed).
-
+#' @export
 example = function() {
+    #---------
+    # This script is an example of using the latent package to 
+    # estimate the parameters of a latent variable model for the
+    # FIB counts in the storm sewer data set (with event 3 removed).
+    
     # Import the data
     load("data/dfOptAnalysisDataSSJan2015.Rdata")
     
@@ -24,5 +25,5 @@ example = function() {
     event = as.integer(dfOptSumAll$Event[indx])
     
     # Now estimate the model parameters:
-    result = latent(fib, min.detect, event, specific)
+    latent(fib, min.detect, event, specific)
 }
