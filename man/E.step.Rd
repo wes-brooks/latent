@@ -4,21 +4,23 @@
 \alias{E.step}
 \title{Expectation step}
 \usage{
-E.step(alpha, beta, gamma, data, event)
+E.step(alpha, beta, gamma, data, min.detect, event)
 }
 \arguments{
-\item{alpha}{Vector of offsets, length is $d \times p$, where $d$ is the number of unique events and $p$ is the number of FIB species.}
+\item{alpha}{vector of intercepts where each entry is the intercept for one species/event combination}
 
-\item{beta}{Vector of slopes, denoting the sensitivity of each FIB species to the level of wastewater contamination. Length is $p$.}
+\item{beta}{slope vector with one entry per FIB species, which indicates the marginal increase in that species' log-mean for a unit increase in the contamination index}
 
-\item{gamma}{Vector of contamination levels, length $n$.}
+\item{gamma}{contamination vector with one entry per row of data, indicating the contamination index for the corresponding row}
 
-\item{event}{Vector indicating the event during which each sample was drawn.}
+\item{data}{matrix of FIB counts with one row per sample and one column per FIB species}
 
-\item{y}{Matrix of observed FIB counts, of dimension $n \times p$. Each row contains the results for one sample, and each column is the counts for one FIB species.}
+\item{min.detect}{minimum detectable level of the FIB assay - counts below this threshold are censored}
+
+\item{event}{vector with one entry per row of data where each entry indicates the event with which the data row is associated}
 }
 \value{
-Matrix of FIB counts, where the censored counts are replaced by their expectations under the current parameters.
+A matrix of FIB counts, where the censored counts are replaced by their expectations under the current parameters.
 }
 \description{
 Compute the expectations of censored FIB counts, resitricted to be less than the censoring threshold.
