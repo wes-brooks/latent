@@ -11,14 +11,14 @@
 #' @return A list of results
 #' 
 #' @export
-latent = function(data, min.detect, event, specific=NULL, verbose=TRUE) {
+latent <- function(data, min.detect, event, specific=NULL, verbose=TRUE) {
     #Initial parameters:
     xx = c(rep(as.integer(!specific), length(unique(event))), rep(1, nrow(data) + ncol(data)))
     finished = FALSE
     
     f.new = log.lik(data, xx, event)
     f.old = -Inf
-    tol = .Machine$double.eps %>% sqrt
+    tol = sqrt(.Machine$double.eps)
     tol = 1e-5
     check=Inf
     

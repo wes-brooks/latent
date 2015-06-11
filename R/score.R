@@ -9,7 +9,7 @@
 #' 
 #' @return The score functions, evaluated at the current parameter values.
 #' 
-score = function(data, params, event, specific=NULL) {
+score <- function(data, params, event, specific=NULL) {
     #Basic constants:
     n = nrow(data)
     p = ncol(data)

@@ -8,7 +8,7 @@
 #' 
 #' @return total log-likelihood of the data under the current parameter values
 #' 
-log.lik = function(data, params, event) {
+log.lik <- function(data, params, event) {
     #Basic constants:
     n = nrow(data)
     p = ncol(data)
