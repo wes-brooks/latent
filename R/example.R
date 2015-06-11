@@ -1,5 +1,11 @@
+#' An  example illustrating the function of packace latent
+#' 
+#' Estimates a latent contamination variable for the storm sewer data, using EM to impute censored values
+#' 
+#' @return latent a list as returned by function \code{\link{latent}}
+#' 
 #' @export
-example = function() {
+example <- function() {
     #---------
     # This script is an example of using the latent package to 
     # estimate the parameters of a latent variable model for the
