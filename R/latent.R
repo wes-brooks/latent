@@ -110,7 +110,7 @@ latent = function(data, min.detect, event, specific=NULL, verbose=TRUE) {
     #Compile the results and return
     result = list()
     result$data = data
-    result$min.detect = cens
+    result$min.detect = min.detect
     result$event = event
     result$specific = specific
     result$alpha = matrix(alpha, d, p, byrow=TRUE)
