@@ -15,5 +15,5 @@
 #'   \item{Lachno.2}{count of human \emph{Lachnobacteria} in CFU per 100mL}
 #'   ...
 #' }
-#' @source Samples collected by the U.S. Geological Survey Wisconsin Water Science Center under Steve Corsi (srcorsi@usgs.gov)
+#' @source Samples collected by the U.S. Geological Survey Wisconsin Water Science Center under Steve Corsi \email{srcorsi@@usgs.gov}
 "dfOptAnalysisDataSSJan2015"
