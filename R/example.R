@@ -6,7 +6,7 @@ example = function() {
     # FIB counts in the storm sewer data set (with event 3 removed).
     
     # Import the data
-    load("data/dfOptAnalysisDataSSJan2015.Rdata")
+    data("dfOptAnalysisDataSSJan2015.Rdata")
     
     # Drop event 3, change mei[4] from "TNTC" to 0, and then convert all FIB to numerics:
     indx = which(dfOptSumAll$Event != "03")
