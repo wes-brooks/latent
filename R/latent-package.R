@@ -10,7 +10,6 @@
 #'
 #' @docType package
 #' @name latent-package
-#' @aliases latent
 #' 
 #' 
 NULL

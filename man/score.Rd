@@ -7,18 +7,24 @@
 score(data, params, event, specific = NULL)
 }
 \arguments{
-\item{data}{matrix of observations, with rows equal to the number of observations and columns equal to the number of categories}
+\item{data}{matrix of observations, with rows equal to the number of
+observations and columns equal to the number of categories}
 
-\item{params}{vector of alpha, beta, gamma parameters}
+\item{params}{vector of model parameters, consisting of
+\eqn{\boldsymbol{\alpha}, \boldsymbol{\beta}, \boldsymbol{\gamma}}.}
 
-\item{event}{vector of labels with one entry per row of data, where each entry gives the event to which the corresponding row belongs}
+\item{event}{vector of labels with one entry per row of data, where
+each entry identifies the event to which the corresponding row belongs}
 
-\item{specific}{vector of logical values, one entry per column of data, with each entry indicating whether the corresponding column is human-specific}
+\item{specific}{vector of logical values, one entry per column of data,
+    with each entry indicating whether the corresponding column of the
+    data is a human-specific bacterium}
 }
 \value{
 The score functions, evaluated at the current parameter values.
 }
 \description{
-Computes the score functions (gradients of the log-likelihood) for a Poisson distribution with log-linear model for the mean.
+Evaluates the score functions (gradients of the log-likelihood) for a
+Poisson distribution with log-linear model for the mean.
 }
 

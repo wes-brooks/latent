@@ -1,11 +1,17 @@
 #' Gradient of the log-likelihood
 #' 
-#' Computes the score functions (gradients of the log-likelihood) for a Poisson distribution with log-linear model for the mean.
+#' Evaluates the score functions (gradients of the log-likelihood) for a 
+#' Poisson distribution with log-linear model for the mean.
 #'
-#' @param data matrix of observations, with rows equal to the number of observations and columns equal to the number of categories
-#' @param params vector of alpha, beta, gamma parameters
-#' @param event vector of labels with one entry per row of data, where each entry gives the event to which the corresponding row belongs
-#' @param specific vector of logical values, one entry per column of data, with each entry indicating whether the corresponding column is human-specific
+#' @param data matrix of observations, with rows equal to the number of 
+#'     observations and columns equal to the number of categories
+#' @param params vector of model parameters, consisting of 
+#'     \eqn{\boldsymbol{\alpha}, \boldsymbol{\beta}, \boldsymbol{\gamma}}.
+#' @param event vector of labels with one entry per row of data, where 
+#'     each entry identifies the event to which the corresponding row belongs
+#' @param specific vector of logical values, one entry per column of data, 
+#'     with each entry indicating whether the corresponding column of the 
+#'     data is a human-specific bacterium
 #' 
 #' @return The score functions, evaluated at the current parameter values.
 #' 
@@ -17,7 +23,8 @@ score <- function(data, params, event, specific=NULL) {
     if (is.null(specific))
         specific = rep(FALSE, p)
     if (length(specific) != p)
-        stop("Argument 'specific' must have length equal to the number of pathogens.")
+        stop("Argument 'specific' must have length equal to the number of 
+             pathogens.")
     if (!all(typeof(specific) == "logical"))
         stop("Each element of 'specific' must be logical (boolean).")
     
@@ -30,7 +37,8 @@ score <- function(data, params, event, specific=NULL) {
     alpha.local = matrix(0, n, p)
     for (k in 1:d) {
         indx = which(event==unique(event)[k])
-        alpha.local[indx,] = matrix(alpha[p*(k-1) + 1:p], length(indx), p, byrow=TRUE)
+        alpha.local[indx,] = matrix(alpha[p*(k-1) + 1:p], length(indx), 
+                                    p, byrow=TRUE)
     }
     
     #Just compute this once to save time:
@@ -40,7 +48,8 @@ score <- function(data, params, event, specific=NULL) {
     grad = vector()
     for (k in 1:d) {
         indx = which(event==unique(event)[k])
-        grad = c(grad, as.integer(!specific) * colSums(data[indx,] - eta[indx,], na.rm=TRUE))
+        grad = c(grad, as.integer(!specific) * colSums(data[indx,] - 
+                            eta[indx,], na.rm=TRUE))
     }
     
     #Gradient in the direction of beta:

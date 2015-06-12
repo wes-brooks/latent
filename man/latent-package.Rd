@@ -2,7 +2,6 @@
 % Please edit documentation in R/latent-package.R
 \docType{package}
 \name{latent-package}
-\alias{latent}
 \alias{latent-package}
 \title{latent: Estimate the parameters of a Poisson latent variable model with left-censoring..}
 \description{
